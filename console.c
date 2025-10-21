@@ -51,28 +51,30 @@ int main (void) {
         /* Single Word / Vector Commands */
         if(token2 == NULL){ // Nothing in token2 (one word)
             
-            if(!strcmp(token1, "quit")||!strcmp(token1, "q")){ 
+            if(!strcmp(token1, "quit")||!strcmp(token1, "q")) { 
                 printf("Quitting Program \n");
                 exit(1);
 
-            } else if (!strcmp(token1, "help")||!strcmp(token1, "h")){
-                printf("Commands\nlist: lists all vectors\nclear: clears all vectors\nquit/q: quits program\n");
+            } else if (!strcmp(token1, "help")||!strcmp(token1, "h")) {
+                printf("Commands\nlist: lists all vectors\n
+                                 clear: clears all vectors\n
+                                 quit/q: quits program\n");
 
-            } else if (!strcmp(token1, "list")){
+            } else if (!strcmp(token1, "list")) {
                 list();
 
-            } else if (!strcmp(token1, "clear")){
+            } else if (!strcmp(token1, "clear")) {
                 clear();
 
             } else if (strlen(token1) == 1){ // if JUST Vector name call find
                 Vector search = find(token1); // verify vectors existance
-                if (!strcmp(search.name , "NULL")){
+                if (!strcmp(search.name , "NULL")) {
                     printf("Cannot find vector\n");
                 }else{
                     printf("%s: (%.3f, %.3f, %.3f)\n", search.name, search.x, search.y, search.z);
                 }
                 
-            } else{ 
+            } else { 
                 printf("Invalid input\n");
             }
 
