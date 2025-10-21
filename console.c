@@ -2,7 +2,7 @@
  * File vects.h
  * Description:.h file that contains declaration the struct for vectors
  * Author: Chris Martin
- * Date: 10/15/25
+ * Date: 10/21/25
  * Compile with make 
  *****************************************************************************/
 

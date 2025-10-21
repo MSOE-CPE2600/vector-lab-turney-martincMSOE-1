@@ -2,7 +2,7 @@
  * File vect_math.c
  * Description: mathematical operations on vectors
  * Author: Chris Martin
- * Date: 10/15/25
+ * Date: 10/21/25
  * Compile with make 
  *****************************************************************************/
 

@@ -2,7 +2,7 @@
  * File vect_list.c
  * Description : functions to manage a list of vectors (listing, clearing, etc)
  * Author: Chris Martin
- * Date: 10/15/25
+ * Date: 10/21/25
  * Compile with make 
  *****************************************************************************/
 
@@ -13,7 +13,6 @@
 #define SIZE 10
 
 // list, clear, insert (add vect to list), 
-// maybe find for verifying vect existance, create (a = 1 2 3) 
 
 Vector vect_list[SIZE];
 
@@ -64,7 +63,6 @@ Vector create(char name[20], float x, float y, float z) {
 
 void insert(Vector new) {
     int found = 0;
-     //puts("LOOKING FOR VECTOR");
      for (int i = 0; i < SIZE; i++){ // if same vect exists in array already
          if(!strcmp(vect_list[i].name, new.name)){
             found = 1;
@@ -76,9 +74,8 @@ void insert(Vector new) {
 
     // if new vect is not in list
     if(found == 0){ 
-        //puts("DID NOT FIND VECTOR");
         for (int i = 0; i < SIZE; i++){ // looking for empty spot in list 
-          if (strcmp(vect_list[i].name, "NULL") == 0){ //FIXME
+          if (strcmp(vect_list[i].name, "NULL") == 0){ 
             memcpy(&vect_list[i], &new, sizeof(Vector));
             break;
           }
