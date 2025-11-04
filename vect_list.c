@@ -2,7 +2,7 @@
  * File vect_list.c
  * Description : functions to manage a list of vectors (listing, clearing, etc)
  * Author: Chris Martin
- * Date: 10/21/25
+ * Date: 11/4/25
  * Compile with make 
  *****************************************************************************/
 
