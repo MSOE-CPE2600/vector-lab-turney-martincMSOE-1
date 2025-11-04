@@ -13,7 +13,6 @@
  #include "vector.h"
  #include "vect_math.h"
  #include "vect_list.h"
- #define SIZE 10
 
 int main (void) {
     /* Support up to 10 Vectors*/
@@ -23,7 +22,8 @@ int main (void) {
     char *token1, *token2, *token3, *token4, *token5; // up to 5, minimum 3 tokens
     char operations[] = "+-*.x";
     Vector v1, v2, v3;
-    clear();
+    //clear();
+    initialize_list(); // SHOULD ONLY BE CALLED ONCE TO INITILIZE LIST OF VECTORS
 
     while (1) { // infinite loop to continue until quit
         // clearing tokens
@@ -49,16 +49,15 @@ int main (void) {
         }
 
         /* Single Word / Vector Commands */
-        if(token2 == NULL){ // Nothing in token2 (one word)
+        if(token2 == NULL) { // Nothing in token2 (one word)
             
             if(!strcmp(token1, "quit")||!strcmp(token1, "q")) { 
                 printf("Quitting Program \n");
+                free_list();  
                 exit(1);
 
             } else if (!strcmp(token1, "help")||!strcmp(token1, "h")) {
-                printf("Commands\nlist: lists all vectors\n
-                                 clear: clears all vectors\n
-                                 quit/q: quits program\n");
+                printf("Commands\nlist: lists all vectors\nclear: clears all vectors\nquit/q: quits program\n");
 
             } else if (!strcmp(token1, "list")) {
                 list();
@@ -78,14 +77,30 @@ int main (void) {
                 printf("Invalid input\n");
             }
 
+        /* I/O Operation (save / load ALL to / from particular file) */    
+        } else if (token3 == NULL) { 
+            char *fname = token2;
+            if (!strcmp(token1, "saveall")) {
+                save_all(fname);
+            } else if (!strcmp(token1, "load")) {
+                load(fname);
+            }
         }
+
         /* Vector Arithmetic */
         else if (token3 != NULL) {
 
-            //token4 = strtok(NULL, " \n");
-
             /* 3 tok operations (ex. a . b) */
             if (token4 == NULL) { 
+
+                /* I/O Operation (save ALL to particular file) */
+                if (!strcmp(token1, "save")) {
+                    char *fname = token3;
+                    v1 = find(token2);
+                    save(v1, fname);
+                    continue;
+                }
+
                 v1 = find(token1);
                 v2 = find(token3);
 
@@ -175,13 +190,13 @@ int main (void) {
 
                 } else if(!strcmp(token2, "x") || !strcmp(token4, "x")){
                         if (!strcmp(token2, "x")){ // a x b = c
-                            v1 = find(v1.name);
-                            v2 = find(v2.name);
+                            v1 = find(token1);  
+                            v2 = find(token3);
                             v3 = cross(v1, v2, v3);
                             insert(v3);
-                        } else {
-                            v2 = find(v2.name);
-                            v3 = find(v3.name);
+                        } else { // d = a x b (token4 is "x")
+                            v2 = find(token3);
+                            v3 = find(token5);
                             v1 = cross(v2, v3, v1);
                             insert(v1);
                         }
@@ -195,7 +210,6 @@ int main (void) {
         }
     }
 
-    printf("End of program");
     return 0;
 
 }
